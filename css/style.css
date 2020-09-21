@@ -1,0 +1,15 @@
+.header{
+    text-align: center;
+    margin-top: 80px;
+}
+
+.header p{
+    font-size: 18px;
+}
+.table-part a i{
+    font-size: 18px;;
+}
+.select-item{
+    padding: 8px 8px;
+    border: 1px solid;
+}
