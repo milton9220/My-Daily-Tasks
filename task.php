@@ -13,6 +13,7 @@ else{
     throw new Exception("Databse not connected");
     }
     else{
+        if('add' ==$action){
         $task=$_POST['task'];
         
         $date=$_POST['date'];
@@ -22,11 +23,64 @@ else{
             
             mysqli_query($connection,$query);
             header('Location:index.php?added=true');
+         }
+     }
+     else if('complete'==$action){
+         $taskid=$_POST['taskid'];
+         if($taskid){
+          $query="UPDATE tasks SET complete=1 WHERE id={$taskid}";
+          mysqli_query($connection,$query);
+         }
+         header('Location:index.php');
+      }
+      else if('incomplete'==$action){
+        $itaskid=$_POST['iid'];
+        if($itaskid){
+         $query="UPDATE tasks SET complete=0 WHERE id={$itaskid}";
+         mysqli_query($connection,$query);
         }
-        else{
-            echo "Your input field is empty";
+        header('Location:index.php');
+     }
+     else if('delete'==$action){
+        $dtaskid=$_POST['did'];
+        if($dtaskid){
+         $query="DELETE FROM tasks WHERE id={$dtaskid} LIMIT 1";
+         mysqli_query($connection,$query);
         }
-    
+        header('Location:index.php');
+     }
+     else if('bulk-complete'==$action){
+        $taskids=$_POST['taskids'];
+        //print_r($taskids);
+        $_taskids=join(",",$taskids);
+        //echo $_taskids;
+        if($taskids){
+            $query="UPDATE tasks SET complete=1 WHERE id in ($_taskids)";
+            mysqli_query($connection,$query);
+        }
+        header('Location:index.php');
+       
+     }
+
+     else if('bulk-delete'==$action){
+        $taskids=$_POST['taskids'];
+        //print_r($taskids);
+        $_taskids=join(",",$taskids);
+        //echo $_taskids;
+        if($taskids){
+            $query="DELETE FROM tasks WHERE id in ($_taskids)";
+            mysqli_query($connection,$query);
+        }
+        header('Location:index.php');
+       
+     }
+
+
+  
+  
+  
+  
     }
+      
 }
 
