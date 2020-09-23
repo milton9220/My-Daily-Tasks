@@ -1,2 +1,2 @@
 # My-Daily-Tasks
-<img src="show.png" />
+<img src="img/show.png" />
